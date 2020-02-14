@@ -1,18 +1,19 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss, roc_auc_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+
 from deepctr.models import DeepFM
-from deepctr import SingleFeat
+from deepctr.inputs import  SparseFeat, DenseFeat, get_feature_names
 
 if __name__ == "__main__":
     data = pd.read_csv('./criteo_sample.txt')
 
     sparse_features = ['C' + str(i) for i in range(1, 27)]
-    dense_features = ['I'+str(i) for i in range(1, 14)]
+    dense_features = ['I' + str(i) for i in range(1, 14)]
 
     data[sparse_features] = data[sparse_features].fillna('-1', )
-    data[dense_features] = data[dense_features].fillna(0,)
+    data[dense_features] = data[dense_features].fillna(0, )
     target = ['label']
 
     # 1.Label Encoding for sparse features,and do simple Transformation for dense features
@@ -24,22 +25,23 @@ if __name__ == "__main__":
 
     # 2.count #unique features for each sparse field,and record dense feature field name
 
-    sparse_feature_list = [SingleFeat(feat, data[feat].nunique())
-                           for feat in sparse_features]
-    dense_feature_list = [SingleFeat(feat, 0)
+    fixlen_feature_columns = [SparseFeat(feat, vocabulary_size=data[feat].nunique(),embedding_dim=4)
+                           for i,feat in enumerate(sparse_features)] + [DenseFeat(feat, 1,)
                           for feat in dense_features]
+
+    dnn_feature_columns = fixlen_feature_columns
+    linear_feature_columns = fixlen_feature_columns
+
+    feature_names = get_feature_names(linear_feature_columns + dnn_feature_columns)
 
     # 3.generate input data for model
 
     train, test = train_test_split(data, test_size=0.2)
-    train_model_input = [train[feat.name].values for feat in sparse_feature_list] + \
-        [train[feat.name].values for feat in dense_feature_list]
-    test_model_input = [test[feat.name].values for feat in sparse_feature_list] + \
-        [test[feat.name].values for feat in dense_feature_list]
+    train_model_input = {name:train[name] for name in feature_names}
+    test_model_input = {name:test[name] for name in feature_names}
 
     # 4.Define Model,train,predict and evaluate
-    model = DeepFM({"sparse": sparse_feature_list,
-                    "dense": dense_feature_list}, final_activation='sigmoid')
+    model = DeepFM(linear_feature_columns, dnn_feature_columns, task='binary')
     model.compile("adam", "binary_crossentropy",
                   metrics=['binary_crossentropy'], )
 

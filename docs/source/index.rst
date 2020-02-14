@@ -6,7 +6,7 @@
 Welcome to DeepCTR's documentation!
 ===================================
 
-|Downloads|_ |Stars|_ |Forks|_ |PyPi|_ |Issues|_ |Activity|_
+|Downloads|_ |Stars|_ |Forks|_ |PyPii|_ |Issues|_ |Chat|_
 
 .. |Downloads| image:: https://pepy.tech/badge/deepctr
 .. _Downloads: https://pepy.tech/project/deepctr
@@ -17,37 +17,42 @@ Welcome to DeepCTR's documentation!
 .. |Forks| image:: https://img.shields.io/github/forks/shenweichen/deepctr.svg
 .. _Forks: https://github.com/shenweichen/DeepCTR/fork
 
-.. |PyPi| image:: https://img.shields.io/pypi/v/deepctr.svg
-.. _PyPi: https://pypi.org/project/deepctr/
+.. |PyPii| image:: https://img.shields.io/pypi/v/deepctr.svg
+.. _PyPii: https://pypi.org/project/deepctr
 
 .. |Issues| image:: https://img.shields.io/github/issues/shenweichen/deepctr.svg
 .. _Issues: https://github.com/shenweichen/deepctr/issues
 
-.. |Activity| image:: https://img.shields.io/github/last-commit/shenweichen/deepctr.svg
-.. _Activity: https://github.com/shenweichen/DeepCTR
+.. |Chat| image:: https://img.shields.io/badge/chat-wechat-brightgreen?style=flat
+.. _Chat: ./#disscussiongroup
 
+DeepCTR is a **Easy-to-use** , **Modular** and **Extendible** package of deep-learning based CTR models along with lots of core components layer  which can be used to easily build custom models.It is compatible with **tensorflow 1.4+ and 2.0+**.You can use any complex model with ``model.fit()`` and ``model.predict()``.
 
-DeepCTR is a **Easy-to-use** , **Modular** and **Extendible** package of deep-learning based CTR models along with lots of core components layer  which can be used to build your own custom model easily.It is implemented by tensorflow.You can use any complex model with ``model.fit()`` and ``model.predict()``.
-
-Through  ``pip install deepctr``  get the package and `Get Started! <./Quick-Start.html>`_ (`中文介绍 <https://zhuanlan.zhihu.com/p/53231955>`_)
+Let's `Get Started! <./Quick-Start.html>`_ (`Chinese Introduction <https://zhuanlan.zhihu.com/p/53231955>`_)
 
 You can read the latest code at https://github.com/shenweichen/DeepCTR
 
 News
 -----
+02/08/2020 : Fix some bugs. `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.7.2>`_
 
-02/17/2010 : Refactor layers ,add ``BiLSTM`` and ``Transformer`` . `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.3.1>`_
+01/28/2020 : Simplify `VarLenSparseFeat <./Features.html#varlensparsefeat>`_ ,support setting weight_normalization.Fix problem of embedding size of ``SparseFeat`` in ``linear_feature_columns``. `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.7.1>`_
 
-01/24/2019 : Use a `new feature config generation method <./Examples.html#classification-criteo>`_ and fix bugs. `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.2.3>`_
+11/24/2019 : Refactor `feature columns <./Features.html#feature-columns>`_ . Different features can use different ``embedding_dim`` and  group-wise interaction is available by setting ``group_name``. `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.7.0>`_
 
-01/01/2019 : Add `sequence(multi-value) input support <./Examples.html#multi-value-input-movielens>`_ for ``AFM,AutoInt,DCN,DeepFM,FNN,NFM,PNN,xDeepFM`` models. `Changelog <https://github.com/shenweichen/DeepCTR/releases/tag/v0.2.2>`_
+DisscussionGroup
+-----------------------
+
+公众号：**浅梦的学习笔记**  wechat ID: **deepctrbot**
+
+.. image:: ../pics/weichennote.png
 
 .. toctree::
    :maxdepth: 2
    :caption: Home:
 
    Quick-Start<Quick-Start.md>
-   Features
+   Features<Features.md>
    Examples<Examples.md>
    FAQ<FAQ.md>
    History<History.md>
@@ -56,8 +61,8 @@ News
    :maxdepth: 3
    :caption: API:
 
-   Models API<Models-API>
-   Layers API<Layers>
+   Models<Models>
+   Layers<Layers>
 
 
 

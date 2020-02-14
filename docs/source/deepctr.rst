@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    deepctr.contrib
     deepctr.layers
     deepctr.models
 
@@ -14,7 +15,7 @@ Submodules
 
 .. toctree::
 
-   deepctr.input_embedding
+   deepctr.inputs
    deepctr.utils
 
 Module contents
